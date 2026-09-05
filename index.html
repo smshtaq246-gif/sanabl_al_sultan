@@ -520,4 +520,867 @@ header{
       </div>
     </div>
 
-    <button class="cart-top" onclick="showPage
+    <button class="cart-top" onclick="showPage('cart')">
+      🛒
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- HOME -->
+
+<div id="homePage" class="page active">
+
+  <section class="hero">
+    <div class="hero-logo">🌾</div>
+
+    <h2>سنابل السلطان</h2>
+
+    <p>
+      مذاق يصنع الفرق
+      <br>
+      مخبوزات وحلويات طازجة يومياً
+    </p>
+  </section>
+
+  <div class="categories">
+    <button class="active" onclick="filterProducts('all',this)">الكل</button>
+    <button onclick="filterProducts('pastry',this)">المعجنات</button>
+    <button onclick="filterProducts('croissant',this)">الكرواسون</button>
+    <button onclick="filterProducts('sweets',this)">الحلويات</button>
+  </div>
+
+  <main class="container">
+    <div class="products" id="products"></div>
+  </main>
+
+</div>
+
+<!-- CART -->
+
+<div id="cartPage" class="page">
+
+  <main class="container">
+    <div class="cart">
+
+      <h2 class="section-title">🛒 سلة المشتريات</h2>
+
+      <div id="cartItems"></div>
+
+      <div class="total-box">
+        <small>الإجمالي الفرعي</small>
+        <div class="total" id="totalPrice">0 د.ع</div>
+      </div>
+
+      <button class="checkout-btn" onclick="showPage('checkout')">
+        إتمام الطلب ←
+      </button>
+
+    </div>
+  </main>
+
+</div>
+
+<!-- CHECKOUT -->
+
+<div id="checkoutPage" class="page">
+
+  <main class="container">
+
+    <div class="checkout">
+
+      <h2 class="section-title">تأكيد الطلب</h2>
+
+      <div class="form-group">
+        <label>الاسم الكامل</label>
+        <input
+          type="text"
+          id="customerName"
+          placeholder="اكتب اسمك الكامل">
+      </div>
+
+      <div class="form-group">
+        <label>رقم واتساب</label>
+        <input
+          type="tel"
+          id="customerPhone"
+          placeholder="07XXXXXXXXX"
+          inputmode="numeric">
+      </div>
+
+      <div class="location-box">
+
+        <div class="location-status" id="locationStatus">
+          📍 لم يتم تحديد موقعك بعد
+        </div>
+
+        <button class="location-btn" onclick="getLocation()">
+          📍 تحديد موقعي
+        </button>
+
+        <!-- WAZE ONLY -->
+        <a
+          id="wazeLink"
+          class="waze-link"
+          target="_blank">
+          🧭 فتح الموقع في Waze
+        </a>
+
+      </div>
+
+      <div class="form-group">
+        <label>ملاحظات (اختياري)</label>
+
+        <textarea
+          id="notes"
+          rows="4"
+          placeholder="أي ملاحظات على الطلب..."></textarea>
+      </div>
+
+      <button class="send-btn" onclick="sendOrder()">
+        🟢 إرسال الطلب عبر واتساب
+      </button>
+
+    </div>
+
+  </main>
+
+</div>
+
+<!-- SUCCESS -->
+
+<div id="successPage" class="page">
+
+  <main class="container">
+
+    <div class="success">
+
+      <div class="success-icon">✓</div>
+
+      <h2>تم إرسال طلبك بنجاح</h2>
+
+      <p>
+        سيتم التواصل معك قريباً عبر واتساب
+        <br>
+        لتأكيد الطلب والتوصيل.
+      </p>
+
+      <button onclick="openWaze()">
+        🧭 فتح موقعي في Waze
+      </button>
+
+      <button onclick="showPage('home')">
+        🏠 العودة للرئيسية
+      </button>
+
+    </div>
+
+  </main>
+
+</div>
+
+<!-- NAV -->
+
+<nav class="bottom-nav">
+
+  <div class="bottom-inner">
+
+    <button class="nav-btn active" onclick="showPage('home')">
+      🏠<br>الرئيسية
+    </button>
+
+    <button class="nav-btn" onclick="showPage('home')">
+      🛍️<br>المنتجات
+    </button>
+
+    <button class="nav-btn" onclick="showPage('cart')">
+      🛒<br>السلة
+    </button>
+
+    <button class="nav-btn">
+      📞<br>اتصل بنا
+    </button>
+
+  </div>
+
+</nav>
+
+<script>
+
+/* =========================
+   إعدادات الموقع
+========================= */
+
+const BUSINESS_WHATSAPP = "9647876388878";
+
+let userLocation = null;
+
+
+/* =========================
+   المنتجات
+========================= */
+
+const products = [
+
+  {
+    id:1,
+    name:"كيلو بيتي فور",
+    price:12000,
+    category:"sweets",
+    icon:"🍪"
+  },
+
+  {
+    id:2,
+    name:"كيلو تارت",
+    price:12000,
+    category:"sweets",
+    icon:"🍰"
+  },
+
+  {
+    id:3,
+    name:"كرواسون شوكيو",
+    price:1500,
+    category:"croissant",
+    icon:"🥐"
+  },
+
+  {
+    id:4,
+    name:"كرواسون نوتيلا",
+    price:1500,
+    category:"croissant",
+    icon:"🥐"
+  },
+
+  {
+    id:5,
+    name:"صمون بركر شوفان",
+    price:1000,
+    category:"pastry",
+    icon:"🍔"
+  },
+
+  {
+    id:6,
+    name:"صمون كهرماني صغير",
+    price:1000,
+    category:"pastry",
+    icon:"🥖"
+  },
+
+  {
+    id:7,
+    name:"صمون بركر عادي",
+    price:1000,
+    category:"pastry",
+    icon:"🍔"
+  },
+
+  {
+    id:8,
+    name:"صمون شعير",
+    price:1000,
+    category:"pastry",
+    icon:"🥖"
+  },
+
+  {
+    id:9,
+    name:"كرواسون سادة",
+    price:1500,
+    category:"croissant",
+    icon:"🥐"
+  },
+
+  {
+    id:10,
+    name:"جرك حلاوة وقمر",
+    price:750,
+    category:"sweets",
+    icon:"🍬"
+  }
+
+];
+
+let cart = [];
+
+
+/* =========================
+   عرض المنتجات
+========================= */
+
+function renderProducts(list = products){
+
+  const box = document.getElementById("products");
+
+  box.innerHTML = "";
+
+  list.forEach(product => {
+
+    const item = cart.find(x => x.id === product.id);
+
+    const qty = item ? item.qty : 1;
+
+    box.innerHTML += `
+
+      <div class="card">
+
+        <div class="product-img">
+          ${product.icon}
+        </div>
+
+        <div class="card-body">
+
+          <h3>${product.name}</h3>
+
+          <div class="price">
+            ${product.price.toLocaleString("ar-IQ")} د.ع
+          </div>
+
+          <div class="controls">
+
+            <button
+              class="qty-btn"
+              onclick="changeProductQty(${product.id},-1)">
+              −
+            </button>
+
+            <div
+              class="qty"
+              id="qty-${product.id}">
+              ${qty}
+            </div>
+
+            <button
+              class="qty-btn"
+              onclick="changeProductQty(${product.id},1)">
+              +
+            </button>
+
+          </div>
+
+          <button
+            class="add-btn"
+            onclick="addToCart(${product.id})">
+            إضافة للسلة 🛒
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+  });
+}
+
+
+/* =========================
+   فلترة المنتجات
+========================= */
+
+function filterProducts(category,btn){
+
+  document.querySelectorAll(".categories button")
+    .forEach(b => b.classList.remove("active"));
+
+  btn.classList.add("active");
+
+  if(category === "all"){
+    renderProducts(products);
+  }else{
+    renderProducts(
+      products.filter(p => p.category === category)
+    );
+  }
+}
+
+
+/* =========================
+   تغيير الكمية
+========================= */
+
+function changeProductQty(id,value){
+
+  const element = document.getElementById("qty-"+id);
+
+  let qty = parseInt(element.innerText);
+
+  qty += value;
+
+  if(qty < 1) qty = 1;
+
+  element.innerText = qty;
+}
+
+
+/* =========================
+   إضافة للسلة
+========================= */
+
+function addToCart(id){
+
+  const product = products.find(p => p.id === id);
+
+  const qtyElement = document.getElementById("qty-"+id);
+
+  const qty = parseInt(qtyElement.innerText);
+
+  const existing = cart.find(p => p.id === id);
+
+  if(existing){
+
+    existing.qty += qty;
+
+  }else{
+
+    cart.push({
+      ...product,
+      qty:qty
+    });
+
+  }
+
+  updateCartCount();
+
+  alert("تمت إضافة المنتج إلى السلة ✅");
+}
+
+
+/* =========================
+   عدد السلة
+========================= */
+
+function updateCartCount(){
+
+  const count = cart.reduce(
+    (sum,item) => sum + item.qty,
+    0
+  );
+
+  document.getElementById("cartCount").innerText = count;
+}
+
+
+/* =========================
+   عرض السلة
+========================= */
+
+function renderCart(){
+
+  const box = document.getElementById("cartItems");
+
+  box.innerHTML = "";
+
+  if(cart.length === 0){
+
+    box.innerHTML = `
+      <div style="
+        text-align:center;
+        padding:50px 10px;
+        color:#aaa;">
+        🛒<br><br>
+        السلة فارغة
+      </div>
+    `;
+
+    document.getElementById("totalPrice").innerText = "0 د.ع";
+
+    return;
+  }
+
+  cart.forEach(item => {
+
+    box.innerHTML += `
+
+      <div class="cart-item">
+
+        <div class="cart-item-info">
+
+          <div class="cart-item-name">
+            ${item.icon} ${item.name}
+          </div>
+
+          <div class="cart-item-qty">
+            الكمية: ${item.qty}
+          </div>
+
+        </div>
+
+        <div class="cart-actions">
+
+          <button
+            class="qty-btn"
+            onclick="cartQty(${item.id},-1)">
+            −
+          </button>
+
+          <b>${item.qty}</b>
+
+          <button
+            class="qty-btn"
+            onclick="cartQty(${item.id},1)">
+            +
+          </button>
+
+          <button
+            class="delete"
+            onclick="removeFromCart(${item.id})">
+            🗑
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+  });
+
+  const total = cart.reduce(
+    (sum,item) => sum + (item.price * item.qty),
+    0
+  );
+
+  document.getElementById("totalPrice").innerText =
+    total.toLocaleString("ar-IQ") + " د.ع";
+}
+
+
+/* =========================
+   كمية السلة
+========================= */
+
+function cartQty(id,value){
+
+  const item = cart.find(p => p.id === id);
+
+  if(!item) return;
+
+  item.qty += value;
+
+  if(item.qty <= 0){
+
+    cart = cart.filter(p => p.id !== id);
+
+  }
+
+  updateCartCount();
+
+  renderCart();
+}
+
+
+/* =========================
+   حذف
+========================= */
+
+function removeFromCart(id){
+
+  cart = cart.filter(p => p.id !== id);
+
+  updateCartCount();
+
+  renderCart();
+}
+
+
+/* =========================
+   الصفحات
+========================= */
+
+function showPage(page){
+
+  document.querySelectorAll(".page")
+    .forEach(p => p.classList.remove("active"));
+
+  if(page === "home"){
+
+    document.getElementById("homePage")
+      .classList.add("active");
+
+    window.scrollTo(0,0);
+
+  }
+
+  if(page === "cart"){
+
+    document.getElementById("cartPage")
+      .classList.add("active");
+
+    renderCart();
+
+    window.scrollTo(0,0);
+
+  }
+
+  if(page === "checkout"){
+
+    if(cart.length === 0){
+
+      alert("السلة فارغة");
+
+      showPage("home");
+
+      return;
+    }
+
+    document.getElementById("checkoutPage")
+      .classList.add("active");
+
+    window.scrollTo(0,0);
+
+  }
+
+  if(page === "success"){
+
+    document.getElementById("successPage")
+      .classList.add("active");
+
+    window.scrollTo(0,0);
+
+  }
+
+}
+
+
+/* =========================
+   تحديد الموقع
+========================= */
+
+function getLocation(){
+
+  const status =
+    document.getElementById("locationStatus");
+
+  const waze =
+    document.getElementById("wazeLink");
+
+  if(!navigator.geolocation){
+
+    status.innerText =
+      "❌ جهازك لا يدعم تحديد الموقع";
+
+    return;
+  }
+
+  status.innerText =
+    "📍 جاري تحديد موقعك...";
+
+  navigator.geolocation.getCurrentPosition(
+
+    function(position){
+
+      const lat =
+        position.coords.latitude;
+
+      const lon =
+        position.coords.longitude;
+
+      userLocation = {
+        lat:lat,
+        lon:lon
+      };
+
+      status.innerText =
+        "✅ تم تحديد موقعك بنجاح";
+
+      /*
+       * WAZE ONLY
+       * لا يوجد Google Maps هنا
+       */
+
+      const wazeUrl =
+        `https://waze.com/ul?ll=${lat},${lon}&navigate=yes`;
+
+      waze.href = wazeUrl;
+
+      waze.style.display = "block";
+
+    },
+
+    function(){
+
+      status.innerText =
+        "❌ تعذر تحديد الموقع، فعّل GPS وحاول مرة ثانية";
+
+    },
+
+    {
+      enableHighAccuracy:true,
+      timeout:15000,
+      maximumAge:0
+    }
+
+  );
+}
+
+
+/* =========================
+   فتح Waze
+========================= */
+
+function openWaze(){
+
+  if(!userLocation){
+
+    alert("حدد موقعك أولاً");
+
+    showPage("checkout");
+
+    return;
+  }
+
+  const url =
+    `https://waze.com/ul?ll=${userLocation.lat},${userLocation.lon}&navigate=yes`;
+
+  window.open(url,"_blank");
+}
+
+
+/* =========================
+   إرسال الطلب
+========================= */
+
+function sendOrder(){
+
+  const name =
+    document.getElementById("customerName")
+    .value.trim();
+
+  const phone =
+    document.getElementById("customerPhone")
+    .value.trim();
+
+  const notes =
+    document.getElementById("notes")
+    .value.trim();
+
+
+  /* التحقق */
+
+  if(!name){
+
+    alert("اكتب اسمك الكامل");
+
+    return;
+  }
+
+
+  if(!phone){
+
+    alert("اكتب رقم واتساب الخاص بك");
+
+    return;
+  }
+
+
+  if(phone.length < 10){
+
+    alert("تأكد من رقم الواتساب");
+
+    return;
+  }
+
+
+  if(!userLocation){
+
+    alert("حدد موقعك أولاً حتى يتم إرسال موقع Waze");
+
+    return;
+  }
+
+
+  if(cart.length === 0){
+
+    alert("السلة فارغة");
+
+    return;
+  }
+
+
+  /*
+   * =====================================
+   * إنشاء قائمة الطلب
+   * بدون الأسعار نهائياً
+   * =====================================
+   */
+
+  let orderText = "";
+
+  cart.forEach((item,index) => {
+
+    orderText +=
+      `${index + 1}. ${item.name} × ${item.qty}\n`;
+
+  });
+
+
+  /*
+   * =====================================
+   * WAZE ONLY
+   * =====================================
+   */
+
+  const wazeUrl =
+    `https://waze.com/ul?ll=${userLocation.lat},${userLocation.lon}&navigate=yes`;
+
+
+  /*
+   * =====================================
+   * الرسالة للمندوب
+   * بدون أي سعر
+   * =====================================
+   */
+
+  let message =
+
+`🟤 طلب جديد - سنابل السلطان
+
+👤 الاسم: ${name}
+
+📱 رقم الزبون: ${phone}
+
+🛒 الطلب:
+${orderText}
+📍 موقع الزبون عبر Waze:
+${wazeUrl}
+
+📝 ملاحظات:
+${notes || "لا توجد"}
+
+🚚 يرجى التواصل مع الزبون لتأكيد الطلب والتوصيل.`;
+
+
+  /*
+   * فتح واتساب
+   */
+
+  const whatsappUrl =
+    `https://wa.me/${BUSINESS_WHATSAPP}?text=${encodeURIComponent(message)}`;
+
+
+  window.open(whatsappUrl,"_blank");
+
+
+  /*
+   * الانتقال لصفحة النجاح
+   */
+
+  showPage("success");
+
+}
+
+
+/* =========================
+   تشغيل أولي
+========================= */
+
+renderProducts();
+
+updateCartCount();
+
+</script>
+
+</body>
+</html>
