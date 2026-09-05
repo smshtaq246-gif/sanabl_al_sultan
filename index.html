@@ -3,750 +3,308 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#b88932">
 <title>سنابل السلطان | الطلبات</title>
-
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
 body{
   font-family:Tahoma,Arial,sans-serif;
-  background:linear-gradient(135deg,#fff8e8,#f4dfb0);
-  color:#3d2b16;
+  background:linear-gradient(135deg,#fffaf0,#f3dfb0);
+  color:#33281d;
   min-height:100vh;
 }
-
 header{
-  background:linear-gradient(135deg,#8b5a24,#c99a45);
-  color:white;
-  padding:35px 20px 45px;
+  background:linear-gradient(135deg,#9b6a24,#d2a64b);
+  color:#fff;
   text-align:center;
-  border-radius:0 0 35px 35px;
-  box-shadow:0 8px 25px #0002;
+  padding:28px 16px 24px;
+  box-shadow:0 5px 20px #0002;
 }
-
 .logo{
-  width:105px;
-  height:105px;
-  margin:auto;
-  border-radius:50%;
-  background:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#9b692b;
-  font-size:20px;
-  font-weight:bold;
-  box-shadow:0 5px 20px #0003;
+  width:90px;height:90px;border-radius:50%;
+  background:#fff8;
+  border:3px solid #fff;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 12px;
+  font-size:25px;font-weight:900;
 }
-
-header h1{
-  margin-top:18px;
-  font-size:35px;
-}
-
-header p{
-  margin-top:10px;
-  font-size:17px;
-  opacity:.95;
-}
-
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:25px 15px 50px;
-}
-
-.title{
-  text-align:center;
-  margin:15px 0 25px;
-}
-
-.title h2{
-  font-size:26px;
-  color:#79501f;
-}
-
-.title p{
-  margin-top:7px;
-  color:#765f43;
-}
-
+header h1{font-size:34px;margin-bottom:8px}
+header p{font-size:15px;opacity:.95}
+.container{max-width:950px;margin:auto;padding:22px 14px 100px}
+.title{text-align:center;margin:8px 0 20px}
+.title h2{font-size:25px;color:#76501f}
+.title p{margin-top:6px;color:#765f43}
 .products{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:13px;
 }
-
-.product{
-  background:white;
-  border-radius:20px;
-  padding:18px 12px;
-  text-align:center;
-  box-shadow:0 5px 20px #6b471b22;
-  border:1px solid #ecd6a5;
-}
-
-.product .emoji{
-  font-size:42px;
-}
-
-.product h3{
-  margin:10px 0 6px;
-  font-size:18px;
-}
-
-.price{
-  color:#a46b1f;
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:12px;
-}
-
-button{
-  border:0;
-  cursor:pointer;
-  font-family:inherit;
-}
-
-.add{
-  background:#b9822d;
-  color:white;
-  padding:10px 18px;
-  border-radius:25px;
-  font-size:15px;
-  width:100%;
-}
-
-.add:active{
-  transform:scale(.97);
-}
-
-.cart{
-  background:white;
-  margin-top:30px;
-  border-radius:25px;
-  padding:22px;
-  box-shadow:0 5px 20px #6b471b22;
-}
-
-.cart h2{
-  text-align:center;
-  margin-bottom:18px;
-  color:#79501f;
-}
-
-.cart-item{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  border-bottom:1px solid #eee;
-  padding:12px 0;
-}
-
-.qty{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.qty button{
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  background:#b9822d;
-  color:white;
-  font-size:18px;
-}
-
-.total{
-  text-align:center;
-  font-size:22px;
-  font-weight:bold;
-  color:#8d5c20;
-  margin-top:18px;
-}
-
-.checkout{
+.card{
   background:#fff;
-  margin-top:25px;
-  padding:22px;
-  border-radius:25px;
-  box-shadow:0 5px 20px #6b471b22;
+  border-radius:18px;
+  padding:16px 13px;
+  box-shadow:0 7px 22px #5d421b18;
+  border:1px solid #ead7ad;
 }
-
-.checkout h2{
-  text-align:center;
-  color:#79501f;
-  margin-bottom:18px;
+.icon{
+  font-size:35px;text-align:center;margin-bottom:8px
 }
-
+.card h3{font-size:17px;line-height:1.5;text-align:center}
+.price{text-align:center;color:#a36f20;font-weight:bold;margin:7px 0 12px}
+.controls{display:flex;align-items:center;justify-content:center;gap:12px}
+.controls button{
+  border:0;border-radius:12px;width:38px;height:38px;
+  background:#b88932;color:#fff;font-size:22px;font-weight:bold;
+}
+.qty{font-size:18px;font-weight:bold;min-width:25px;text-align:center}
+.cart{
+  margin-top:25px;background:#fff;border-radius:20px;
+  padding:18px;box-shadow:0 7px 22px #5d421b18;
+}
+.cart h2{text-align:center;color:#76501f;margin-bottom:12px}
+.cart-row{
+  display:flex;justify-content:space-between;gap:10px;
+  padding:10px 0;border-bottom:1px solid #eee;
+}
+.total{
+  display:flex;justify-content:space-between;
+  font-size:20px;font-weight:bold;margin-top:15px
+}
+.checkout{
+  margin-top:20px;background:#fff;border-radius:20px;
+  padding:18px;box-shadow:0 7px 22px #5d421b18;
+}
+.checkout h2{text-align:center;color:#76501f;margin-bottom:15px}
+label{display:block;font-weight:bold;margin:12px 0 6px}
 input{
-  width:100%;
-  padding:15px;
-  margin-bottom:12px;
-  border:1px solid #dfc18b;
-  border-radius:14px;
-  font-family:inherit;
-  font-size:16px;
-  outline:none;
+  width:100%;padding:13px;border:1px solid #d8c39a;
+  border-radius:12px;font-size:16px;outline:none;
 }
-
-input:focus{
-  border-color:#b9822d;
+.location-box{
+  background:#f9f1df;border:1px solid #e2c98f;
+  border-radius:14px;padding:13px;margin-top:8px;
+  line-height:1.8;font-size:14px;
 }
-
-.location{
-  background:#f7edd8;
-  padding:15px;
-  border-radius:15px;
-  margin-bottom:15px;
-  text-align:center;
+.location-btn,.send-btn{
+  width:100%;border:0;border-radius:14px;
+  padding:15px;font-size:17px;font-weight:bold;
+  margin-top:10px;cursor:pointer;
 }
-
-.location button{
-  margin-top:10px;
-  background:#79501f;
-  color:white;
-  padding:12px 18px;
-  border-radius:25px;
-}
-
-.send{
-  width:100%;
-  background:#168c45;
-  color:white;
-  padding:16px;
-  border-radius:30px;
-  font-size:18px;
-  font-weight:bold;
-  margin-top:8px;
-}
-
-.waze{
-  display:none;
-  width:100%;
-  background:#1677c8;
-  color:white;
-  padding:14px;
-  border-radius:30px;
-  text-align:center;
-  text-decoration:none;
-  margin-top:12px;
-}
-
-.empty{
-  text-align:center;
-  color:#888;
-  padding:15px;
-}
-
-footer{
-  text-align:center;
-  padding:25px;
-  color:#765f43;
-  font-size:14px;
-}
-
+.location-btn{background:#eee0bd;color:#654719}
+.send-btn{background:#168c4b;color:#fff}
+.send-btn:disabled{opacity:.45}
+.note{text-align:center;color:#77664f;font-size:13px;margin-top:10px;line-height:1.7}
+.empty{text-align:center;color:#888;padding:10px}
+footer{text-align:center;padding:25px;color:#765f43;font-size:13px}
 @media(max-width:600px){
-  .products{
-    grid-template-columns:1fr 1fr;
-  }
-
-  header h1{
-    font-size:29px;
-  }
-
-  .product{
-    padding:15px 10px;
-  }
-
-  .product h3{
-    font-size:16px;
-  }
+  header h1{font-size:29px}
+  .products{grid-template-columns:1fr 1fr}
+  .card{padding:13px 8px}
+  .card h3{font-size:15px}
+  .icon{font-size:30px}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <div class="logo">سنابل<br>السلطان</div>
+  <div class="logo">🌾</div>
   <h1>سنابل السلطان</h1>
   <p>طازج يومياً • مذاق يستحق التجربة ❤️</p>
-  <p>مخبوزات وحلويات طازجة بطعم تحبه من أول لقمة</p>
 </header>
 
-<div class="container">
-
+<main class="container">
   <div class="title">
-    <h2>🍰 منتجاتنا</h2>
-    <p>اختار اللي يعجبك وأضفه إلى السلة</p>
+    <h2>منتجاتنا</h2>
+    <p>اختار المنتجات والكمية، وبعدها أكمل الطلب</p>
   </div>
 
-  <div class="products" id="products"></div>
+  <section class="products" id="products"></section>
 
-  <div class="cart">
-    <h2>🛒 سلة المشتريات</h2>
-    <div id="cart"></div>
+  <section class="cart">
+    <h2>🛒 سلة الطلب</h2>
+    <div id="cartItems"><div class="empty">السلة فارغة حالياً</div></div>
     <div class="total">
-      المجموع: <span id="total">0</span> د.ع
+      <span>المجموع</span>
+      <span id="total">0 د.ع</span>
     </div>
-  </div>
+  </section>
 
-  <div class="checkout">
-
+  <section class="checkout">
     <h2>📦 إكمال الطلب</h2>
 
-    <input
-      id="name"
-      type="text"
-      placeholder="اسم الزبون"
-    >
+    <label for="name">اسم الزبون</label>
+    <input id="name" type="text" placeholder="اكتب اسمك">
 
-    <input
-      id="phone"
-      type="tel"
-      placeholder="رقم الهاتف"
-    >
+    <label for="phone">رقم التواصل واتساب</label>
+    <input id="phone" type="tel" placeholder="مثال: 07801234567">
 
-    <div class="location">
-      <strong>📍 موقع التوصيل</strong>
-      <p id="locationText" style="margin-top:8px">
-        لم يتم تحديد الموقع
-      </p>
-
-      <button onclick="getLocation()">
-        تحديد موقعي الحالي 📍
-      </button>
+    <label>📍 موقع التوصيل</label>
+    <div class="location-box" id="locationText">
+      لم يتم تحديد الموقع بعد.
     </div>
+    <button class="location-btn" onclick="getLocation()">📍 تحديد موقعي الحالي</button>
 
-    <a
-      id="waze"
-      class="waze"
-      target="_blank"
-    >
-      🧭 فتح الموقع في Waze
-    </a>
+    <button class="send-btn" onclick="sendOrder()">إرسال الطلب عبر واتساب</button>
+    <div class="note">
+      بعد الإرسال سيفتح واتساب على رقم الطلبات الثابت.<br>
+      رابط الموقع سيكون مرفقاً بالطلب لفتحه مباشرة في Waze.
+    </div>
+  </section>
+</main>
 
-    <button class="send" onclick="sendOrder()">
-      📲 إرسال الطلب عبر واتساب
-    </button>
-
-  </div>
-
-</div>
-
-<footer>
-  <strong>سنابل السلطان</strong>
-  <br>
-  جميع الحقوق محفوظة © 2026
-</footer>
+<footer>© 2026 سنابل السلطان — جميع الحقوق محفوظة</footer>
 
 <script>
-
-const whatsappNumber = "9647876388878";
-
 const products = [
-
-  {
-    id:1,
-    name:"كيلو بيتيفور",
-    price:12000,
-    emoji:"🍪"
-  },
-
-  {
-    id:2,
-    name:"كيلو تارت",
-    price:12000,
-    emoji:"🍰"
-  },
-
-  {
-    id:3,
-    name:"جرك حلقوم وتمر",
-    price:750,
-    emoji:"🍬"
-  },
-
-  {
-    id:4,
-    name:"كراوسون ساده",
-    price:1500,
-    emoji:"🥐"
-  },
-
-  {
-    id:5,
-    name:"كراوسون نوتيلا",
-    price:1500,
-    emoji:"🥐"
-  },
-
-  {
-    id:6,
-    name:"كراوسون بستاشيو",
-    price:1500,
-    emoji:"🥐"
-  },
-
-  {
-    id:7,
-    name:"صمون كهربائي صغير - 10 قطع",
-    price:1000,
-    emoji:"🥖"
-  },
-
-  {
-    id:8,
-    name:"صمون بركر شوفان - 4 قطع",
-    price:1000,
-    emoji:"🍔"
-  },
-
-  {
-    id:9,
-    name:"صمون بركر عادي - 4 قطع",
-    price:1000,
-    emoji:"🍔"
-  },
-
-  {
-    id:10,
-    name:"صمون شعير - 5 قطع",
-    price:1000,
-    emoji:"🥖"
-  },
-
-  {
-    id:11,
-    name:"صمون شوفان - 5 قطع",
-    price:1000,
-    emoji:"🥖"
-  },
-
-  {
-    id:12,
-    name:"صمون سمسم - 5 قطع",
-    price:1000,
-    emoji:"🥖"
-  }
-
+  {id:1,name:"كيلو بيتيفور",price:12000,icon:"🍪"},
+  {id:2,name:"كيلو تارت",price:12000,icon:"🍰"},
+  {id:3,name:"جرك حلقوم وتمر",price:750,icon:"🍯"},
+  {id:4,name:"كراوسون ساده",price:1500,icon:"🥐"},
+  {id:5,name:"كراوسون نوتيلا",price:1500,icon:"🍫"},
+  {id:6,name:"كراوسون بستاشيو",price:1500,icon:"🥐"},
+  {id:7,name:"صمون كهربائي صغير — 10 قطع",price:1000,icon:"🥖"},
+  {id:8,name:"صمون بركر شوفان — 4 قطع",price:1000,icon:"🍔"},
+  {id:9,name:"صمون بركر عادي — 4 قطع",price:1000,icon:"🍔"},
+  {id:10,name:"صمون شعير — 5 قطع",price:1000,icon:"🥖"},
+  {id:11,name:"صمون شوفان — 5 قطع",price:1000,icon:"🥖"},
+  {id:12,name:"صمون سمسم — 5 قطع",price:1000,icon:"🥖"}
 ];
 
-let cart = [];
+let cart = {};
+let userLocation = null;
 
-let latitude = null;
-let longitude = null;
-
-function money(number){
-  return number.toLocaleString("ar-IQ");
+function money(n){
+  return n.toLocaleString("ar-IQ") + " د.ع";
 }
 
-function showProducts(){
-
-  const box = document.getElementById("products");
-
-  box.innerHTML = products.map(p => `
-
-    <div class="product">
-
-      <div class="emoji">${p.emoji}</div>
-
+function renderProducts(){
+  document.getElementById("products").innerHTML = products.map(p => `
+    <div class="card">
+      <div class="icon">${p.icon}</div>
       <h3>${p.name}</h3>
-
-      <div class="price">
-        ${money(p.price)} د.ع
+      <div class="price">${money(p.price)}</div>
+      <div class="controls">
+        <button onclick="changeQty(${p.id},1)">+</button>
+        <div class="qty" id="qty-${p.id}">0</div>
+        <button onclick="changeQty(${p.id},-1)">−</button>
       </div>
-
-      <button
-        class="add"
-        onclick="addToCart(${p.id})"
-      >
-        إضافة للسلة +
-      </button>
-
     </div>
-
   `).join("");
-
 }
 
-function addToCart(id){
-
-  const product = products.find(p => p.id === id);
-
-  const existing = cart.find(p => p.id === id);
-
-  if(existing){
-    existing.qty++;
-  }else{
-    cart.push({
-      ...product,
-      qty:1
-    });
-  }
-
+function changeQty(id,delta){
+  cart[id] = Math.max(0,(cart[id] || 0) + delta);
+  if(cart[id] === 0) delete cart[id];
+  document.getElementById("qty-"+id).textContent = cart[id] || 0;
   renderCart();
-
-}
-
-function changeQty(id, amount){
-
-  const item = cart.find(p => p.id === id);
-
-  if(!item) return;
-
-  item.qty += amount;
-
-  if(item.qty <= 0){
-    cart = cart.filter(p => p.id !== id);
-  }
-
-  renderCart();
-
 }
 
 function renderCart(){
-
-  const box = document.getElementById("cart");
-
-  if(cart.length === 0){
-
-    box.innerHTML =
-      '<div class="empty">السلة فارغة حالياً 🛒</div>';
-
-    document.getElementById("total").textContent = "0";
-
+  const ids = Object.keys(cart);
+  const box = document.getElementById("cartItems");
+  if(!ids.length){
+    box.innerHTML = '<div class="empty">السلة فارغة حالياً</div>';
+    document.getElementById("total").textContent = "0 د.ع";
     return;
   }
-
-  box.innerHTML = cart.map(item => `
-
-    <div class="cart-item">
-
-      <div>
-        <strong>${item.name}</strong>
-        <br>
-        <small>
-          ${money(item.price)} د.ع × ${item.qty}
-        </small>
-      </div>
-
-      <div class="qty">
-
-        <button
-          onclick="changeQty(${item.id},1)"
-        >+</button>
-
-        <strong>${item.qty}</strong>
-
-        <button
-          onclick="changeQty(${item.id},-1)"
-        >−</button>
-
-      </div>
-
-    </div>
-
-  `).join("");
-
-  const total = cart.reduce(
-    (sum,item) => sum + item.price * item.qty,
-    0
-  );
-
-  document.getElementById("total").textContent =
-    money(total);
-
+  let total = 0;
+  box.innerHTML = ids.map(id => {
+    const p = products.find(x => x.id == id);
+    const subtotal = p.price * cart[id];
+    total += subtotal;
+    return `<div class="cart-row">
+      <span>${p.name} × ${cart[id]}</span>
+      <b>${money(subtotal)}</b>
+    </div>`;
+  }).join("");
+  document.getElementById("total").textContent = money(total);
 }
 
 function getLocation(){
-
+  const box = document.getElementById("locationText");
   if(!navigator.geolocation){
-
-    alert("المتصفح لا يدعم تحديد الموقع");
-
+    box.textContent = "المتصفح لا يدعم تحديد الموقع.";
     return;
   }
-
-  document.getElementById("locationText").textContent =
-    "جاري تحديد موقعك...";
-
+  box.textContent = "جاري تحديد موقعك...";
   navigator.geolocation.getCurrentPosition(
-
-    function(position){
-
-      latitude = position.coords.latitude;
-      longitude = position.coords.longitude;
-
-      document.getElementById("locationText").textContent =
-        "تم تحديد موقعك بنجاح ✅";
-
-      const wazeUrl =
-        "https://www.waze.com/ul?ll=" +
-        latitude +
-        "%2C" +
-        longitude +
-        "&navigate=yes";
-
-      const wazeButton =
-        document.getElementById("waze");
-
-      wazeButton.href = wazeUrl;
-      wazeButton.style.display = "block";
-
+    pos => {
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+      userLocation = {lat,lng};
+      box.innerHTML = `تم تحديد موقعك بنجاح ✅<br>
+        الإحداثيات: ${lat.toFixed(6)}, ${lng.toFixed(6)}<br>
+        <a target="_blank" href="https://waze.com/ul?ll=${lat},${lng}&navigate=yes">فتح الموقع في Waze</a>`;
     },
-
-    function(){
-
-      document.getElementById("locationText").textContent =
-        "تعذر تحديد الموقع ❌";
-
-      alert(
-        "فعّل إذن الموقع للمتصفح ثم حاول مرة ثانية"
-      );
-
+    err => {
+      box.textContent = "تعذر تحديد الموقع. تأكد من السماح للموقع من إعدادات المتصفح ثم حاول مرة أخرى.";
     },
-
-    {
-      enableHighAccuracy:true,
-      timeout:15000,
-      maximumAge:0
-    }
-
+    {enableHighAccuracy:true,timeout:15000,maximumAge:0}
   );
-
 }
 
 function sendOrder(){
+  const ids = Object.keys(cart);
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
 
-  if(cart.length === 0){
-
-    alert("أضف منتج واحد على الأقل إلى السلة");
-
+  if(!ids.length){
+    alert("أضف منتجاً واحداً على الأقل إلى السلة.");
     return;
   }
-
-  const name =
-    document.getElementById("name").value.trim();
-
-  const phone =
-    document.getElementById("phone").value.trim();
-
   if(!name){
-
-    alert("اكتب اسمك أولاً");
-
+    alert("اكتب اسم الزبون.");
+    document.getElementById("name").focus();
     return;
   }
-
   if(!phone){
-
-    alert("اكتب رقم الهاتف أولاً");
-
+    alert("اكتب رقم التواصل واتساب.");
+    document.getElementById("phone").focus();
+    return;
+  }
+  if(!userLocation){
+    alert("حدد موقع التوصيل أولاً.");
     return;
   }
 
-  if(latitude === null || longitude === null){
-
-    alert("حدد موقع التوصيل أولاً 📍");
-
-    return;
-  }
-
-  let orderNumber =
-    "SS-" +
-    Date.now().toString().slice(-6);
-
-  let message =
-    "🟤 *طلب جديد - سنابل السلطان*%0A%0A";
-
-  message +=
-    "🔢 رقم الطلب: " +
-    orderNumber +
-    "%0A";
-
-  message +=
-    "👤 الاسم: " +
-    encodeURIComponent(name) +
-    "%0A";
-
-  message +=
-    "📱 الهاتف: " +
-    encodeURIComponent(phone) +
-    "%0A%0A";
-
-  message +=
-    "🛒 *الطلب:*%0A";
-
-  cart.forEach(item => {
-
-    message +=
-      "• " +
-      encodeURIComponent(item.name) +
-      " × " +
-      item.qty +
-      " = " +
-      money(item.price * item.qty) +
-      " د.ع%0A";
-
+  let total = 0;
+  let lines = [];
+  ids.forEach(id => {
+    const p = products.find(x => x.id == id);
+    const subtotal = p.price * cart[id];
+    total += subtotal;
+    lines.push(`• ${p.name} × ${cart[id]} = ${money(subtotal)}`);
   });
 
-  const total =
-    cart.reduce(
-      (sum,item) =>
-        sum + item.price * item.qty,
-      0
-    );
+  const waze = `https://waze.com/ul?ll=${userLocation.lat},${userLocation.lng}&navigate=yes`;
+  const orderNo = "SS-" + Date.now().toString().slice(-7);
 
-  message +=
-    "%0A💰 *المجموع: " +
-    money(total) +
-    " د.ع*%0A";
+  const message =
+`🌾 *طلب جديد — سنابل السلطان*
+رقم الطلب: ${orderNo}
 
-  message +=
-    "🚚 التوصيل: مجاني%0A";
+👤 اسم الزبون: ${name}
+📱 رقم التواصل: ${phone}
 
-  message +=
-    "📍 موقع الزبون:%0A";
+🛒 *تفاصيل الطلب:*
+${lines.join("\n")}
 
-  message +=
-    "https://www.google.com/maps?q=" +
-    latitude +
-    "," +
-    longitude +
-    "%0A";
+💰 *المجموع: ${money(total)}*
 
-  message +=
-    "🧭 Waze:%0A";
+📍 *موقع التوصيل:*
+${userLocation.lat.toFixed(6)}, ${userLocation.lng.toFixed(6)}
 
-  message +=
-    "https://www.waze.com/ul?ll=" +
-    latitude +
-    "%2C" +
-    longitude +
-    "&navigate=yes";
+🚗 *فتح الموقع مباشرة في Waze:*
+${waze}`;
 
-  const url =
-    "https://wa.me/" +
-    whatsappNumber +
-    "?text=" +
-    message;
-
+  const whatsappNumber = "9647876388878";
+  const url = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message);
   window.open(url,"_blank");
-
 }
 
-showProducts();
+renderProducts();
 renderCart();
-
 </script>
-
 </body>
 </html>
