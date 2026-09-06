@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b0f10">
+<title>سنابل السلطان</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:#0c0b09}
+body{min-height:100%;background:radial-gradient(circle at 85% -5%,#3b2b17 0,transparent 34%),linear-gradient(180deg,#0c0b09,#11100d 55%,#0b0a08);color:#f8f1e5;font-family:"Tahoma",Arial,sans-serif}
+button,input,textarea{font:inherit}button{cursor:pointer}
+:root{--gold:#e4b65c;--gold2:#b88736;--cream:#f8f1e5;--muted:#b8afa2;--panel:#171512;--panel2:#211d17;--line:#3a3124;--green:#25c46a}
+header{position:sticky;top:0;z-index:50;background:rgba(12,11,9,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);padding:10px 14px}
+.header{max-width:1050px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px}.logo{width:50px;height:50px;border:1px solid var(--gold2);border-radius:15px;display:grid;place-items:center;font-size:28px;background:linear-gradient(145deg,#292015,#12100d);box-shadow:0 8px 30px #0008}
+.brand h1{color:var(--gold);font-size:21px}.brand p{color:var(--muted);font-size:11px;margin-top:3px}
+.cart-top{position:relative;border:1px solid var(--line);background:var(--panel);color:#fff;border-radius:14px;padding:9px 14px;font-size:20px}
+.cart-count{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;border-radius:50%;background:var(--gold);color:#111;font-size:12px;font-weight:bold;margin-left:4px}
+.page{display:none}.page.active{display:block}
+.hero{max-width:1050px;margin:auto;padding:52px 16px 28px;display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}
+.hero-copy{order:1}.hero-art{order:2}
+.hero-logo{width:230px;height:230px;margin:auto;border:2px solid var(--gold2);border-radius:38px;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,#4b3820,#1b1610 60%,#100e0b);font-size:105px;box-shadow:0 30px 90px #0009}
+.eyebrow{color:var(--gold);font-size:13px;font-weight:bold;letter-spacing:.5px}.hero h2{color:var(--cream);font-size:clamp(42px,7vw,70px);line-height:1.05;margin:12px 0}.hero .slogan{font-size:25px;color:var(--gold);font-weight:bold}.hero .sub{color:#d0c7ba;font-size:17px;margin-top:8px;line-height:1.8}
+.hero-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}.hero-actions button{border-radius:14px;padding:13px 18px;font-weight:bold}.hero-actions .main{border:0;background:linear-gradient(135deg,#f0ca77,#b98635);color:#191207}.hero-actions .alt{border:1px solid var(--line);background:#171411;color:var(--cream)}
+.categories{max-width:1050px;margin:0 auto;padding:8px 14px 4px;display:flex;gap:9px;overflow-x:auto;scrollbar-width:none}.categories button{white-space:nowrap;min-width:105px;border:1px solid var(--line);border-radius:99px;padding:11px 16px;background:#151310;color:#cfc5b7}.categories button.active{background:var(--gold);border-color:var(--gold);color:#171107;font-weight:bold}
+.container{max-width:1050px;margin:auto;padding:26px 14px 110px}.products{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.section-intro{display:flex;justify-content:space-between;align-items:end;margin-bottom:17px;gap:12px}.section-title{color:var(--cream);font-size:29px}.section-intro p{color:var(--muted);font-size:13px}
+.card{overflow:hidden;background:linear-gradient(180deg,#1b1814,#12110e);border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 35px #0007;transition:transform .2s,border-color .2s}.card:hover{transform:translateY(-3px);border-color:#6b5430}
+.product-img{height:185px;background:radial-gradient(circle at 50% 40%,#5a4325,#251c12 58%,#17130f);display:flex;align-items:center;justify-content:center;font-size:78px}
+.card-body{padding:15px}.card h3{font-size:17px;line-height:1.5;margin-bottom:5px}.price{color:var(--gold);font-size:18px;font-weight:bold;margin-bottom:10px}.controls{display:flex;align-items:center;gap:7px;margin-bottom:9px}.qty-btn{width:36px;height:36px;border:1px solid var(--line);border-radius:10px;background:#28231d;color:#fff;font-size:20px}.qty{flex:1;text-align:center;font-weight:bold}.add-btn{width:100%;padding:12px 5px;border:0;border-radius:12px;background:linear-gradient(135deg,#edc36e,#b78334);color:#171108;font-weight:bold}
+.offers-wrap{max-width:1050px;margin:auto;padding:8px 14px 0}.offers-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.offer{padding:21px;border:1px solid #5a4528;border-radius:22px;background:linear-gradient(145deg,#2b2116,#17130f);box-shadow:0 12px 35px #0006}.offer b{font-size:22px}.offer p{color:var(--muted);line-height:1.8;margin:6px 0 10px}.offer button{border:1px solid var(--line);background:#17130f;color:#fff;border-radius:12px;padding:10px 15px}
+.cart,.checkout{max-width:760px;margin:auto}.cart-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px;margin-bottom:10px;background:#171512;border:1px solid var(--line);border-radius:16px}.cart-info{flex:1}.cart-name{font-weight:bold;margin-bottom:5px}.cart-qty{color:var(--muted);font-size:13px}.cart-actions{display:flex;align-items:center;gap:6px}.delete{background:#592b2b;color:#fff;border:0;border-radius:9px;padding:8px}.total-box{margin-top:18px;padding:19px;text-align:center;background:#171512;border:1px solid var(--line);border-radius:17px}.total-box small{display:block;color:var(--muted);margin-bottom:7px}.total{color:var(--gold);font-size:26px;font-weight:bold}.checkout-btn,.send-btn{width:100%;margin-top:15px;padding:15px;border:0;border-radius:14px;background:linear-gradient(135deg,#efc36e,#b78334);color:#171108;font-weight:bold;font-size:17px}
+.form-group{margin-bottom:16px}.form-group label{display:block;color:#ddd;margin-bottom:8px}.form-group input,.form-group textarea{width:100%;background:#171512;color:#fff;border:1px solid var(--line);border-radius:13px;padding:14px;font-size:16px;outline:none}.form-group input:focus,.form-group textarea:focus{border-color:var(--gold)}
+.location-box{background:#171512;border:1px solid var(--line);border-radius:17px;padding:15px;margin-bottom:17px}.location-status{color:#c5bbad;margin-bottom:10px}.location-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.location-btn,.manual-location{width:100%;border:0;border-radius:12px;padding:13px;background:#28231d;color:#fff;font-weight:bold}.manual-location{background:#211b14;border:1px solid var(--line)}.location-help{display:none;color:var(--muted);font-size:12px;line-height:1.8;margin-top:10px}.waze-link{display:none;margin-top:10px;background:#21a8e0;color:#fff;text-align:center;padding:12px;border-radius:11px;text-decoration:none}.send-btn{background:linear-gradient(135deg,#30cf78,#15954c);color:#fff}
+.order-note{margin-top:12px;color:#948a7c;font-size:12px;line-height:1.8}
+.success{max-width:650px;margin:45px auto;text-align:center}.success-icon{width:95px;height:95px;border-radius:50%;border:3px solid var(--green);color:var(--green);font-size:55px;display:grid;place-items:center;margin:auto}.success h2{margin-top:20px;font-size:28px}.success p{color:var(--muted);line-height:1.8;margin:10px 0 25px}.success button{width:100%;padding:14px;border-radius:13px;border:1px solid var(--line);background:#1c1915;color:#fff;margin-top:8px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(16,14,11,.96);backdrop-filter:blur(15px);border-top:1px solid var(--line)}.bottom-inner{max-width:1050px;margin:auto;display:flex;justify-content:space-around}.nav-btn{position:relative;flex:1;background:none;border:0;color:#9f9689;padding:10px 8px;font-size:12px}.nav-btn.active{color:var(--gold)}.empty{text-align:center;padding:50px 10px;color:#aaa;border:1px dashed var(--line);border-radius:16px}
+.toast{position:fixed;bottom:82px;right:50%;transform:translate(50%,20px);background:#f5ecdd;color:#17120b;padding:12px 16px;border-radius:13px;font-weight:bold;opacity:0;pointer-events:none;transition:.25s;z-index:200;box-shadow:0 12px 35px #0008}.toast.show{opacity:1;transform:translate(50%,0)}
+@media(max-width:760px){.hero{grid-template-columns:1fr;text-align:center;padding-top:38px}.hero-copy{order:2}.hero-art{order:1}.hero-logo{width:170px;height:170px;font-size:78px}.hero-actions{justify-content:center}.products{grid-template-columns:repeat(2,1fr)}.offers-grid{grid-template-columns:1fr}.section-intro{align-items:start;flex-direction:column}.product-img{height:145px}.footer-grid{grid-template-columns:1fr}}
+@media(max-width:460px){.products{gap:10px}.card{border-radius:17px}.product-img{height:125px;font-size:62px}.card-body{padding:12px}.card h3{font-size:15px}.hero h2{font-size:44px}.location-actions{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header">
+    <div class="brand">
+      <div class="logo">🌾</div>
+      <div>
+        <h1>سنابل السلطان</h1>
+        <p>مخبوزات وحلويات طازجة يومياً</p>
+      </div>
+    </div>
+    <button class="cart-top" onclick="showPage('cart')">
+      🛒 <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<section id="homePage" class="page active">
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">طازج يومياً • جودة نهتم بها</div>
+      <h2>مذاق يصنع<br><span style="color:var(--gold)">الفرق</span></h2>
+      <div class="slogan">سنابل السلطان</div>
+      <div class="sub">مخبوزات وحلويات طازجة يومياً، اطلب بسهولة واستمتع بطعم تحبه.</div>
+      <div class="hero-actions">
+        <button class="main" onclick="scrollToProducts()">تسوّق الآن ←</button>
+        <button class="alt" onclick="scrollToOffers()">🎁 شاهد العروض</button>
+      </div>
+    </div>
+    <div class="hero-art"><div class="hero-logo">🌾</div></div>
+  </div>
+
+  <div id="offersSection" class="offers-wrap">
+    <div class="section-intro"><div><div class="eyebrow">مختاراتنا</div><h2 class="section-title">عروض سنابل السلطان</h2></div><p>عروض مميزة للزبائن</p></div>
+    <div class="offers-grid">
+      <article class="offer"><b>🚚 التوصيل مجاناً</b><p>اطلب بقيمة 6,000 د.ع أو أكثر داخل السماوة واستفد من التوصيل المجاني.</p><button onclick="scrollToProducts()">اختيار المنتجات</button></article>
+      <article class="offer"><b>🎁 عروض مميزة</b><p>تابع قسم العروض للحصول على العروض اليومية والموسمية حسب المتوفر.</p><button onclick="scrollToProducts()">تسوّق الآن</button></article>
+    </div>
+  </div>
+
+  <div class="categories">
+    <button class="active" onclick="filterProducts('all',this)">الكل</button>
+    <button onclick="filterProducts('pastry',this)">المعجنات</button>
+    <button onclick="filterProducts('croissant',this)">الكرواسون</button>
+    <button onclick="filterProducts('sweets',this)">الحلويات</button>
+  </div>
+
+  <main class="container">
+    <div class="section-intro"><div><div class="eyebrow">اختَر ما تحب</div><h2 class="section-title">منتجاتنا</h2></div><p>أضف ما يعجبك إلى السلة</p></div>
+    <div class="products" id="products"></div>
+  </main>
+</section>
+
+<section id="cartPage" class="page">
+  <main class="container">
+    <div class="cart">
+      <h2 class="section-title">🛒 سلة المشتريات</h2>
+      <div id="cartItems"></div>
+      <div class="total-box">
+        <small>الإجمالي الفرعي</small>
+        <div class="total" id="totalPrice">0 د.ع</div>
+      </div>
+      <button class="checkout-btn" onclick="showPage('checkout')">إتمام الطلب ←</button>
+    </div>
+  </main>
+</section>
+
+<section id="checkoutPage" class="page">
+  <main class="container">
+    <div class="checkout">
+      <h2 class="section-title">تأكيد الطلب</h2>
+
+      <div class="form-group">
+        <label>الاسم الكامل</label>
+        <input id="customerName" type="text" placeholder="اكتب اسمك الكامل" autocomplete="name">
+      </div>
+
+      <div class="form-group">
+        <label>رقم واتساب الزبون</label>
+        <input id="customerPhone" type="tel" placeholder="07XXXXXXXXX" inputmode="numeric" autocomplete="tel">
+      </div>
+
+      <div class="location-box">
+        <div class="location-status" id="locationStatus">📍 لم يتم تحديد موقعك بعد</div>
+        <button class="location-btn" onclick="getLocation()">📍 تحديد موقعي</button>
+        <a id="wazeLink" class="waze-link" target="_blank" rel="noopener">🧭 فتح الموقع في Waze</a>
+      </div>
+
+      <div class="form-group">
+        <label>ملاحظات (اختياري)</label>
+        <textarea id="notes" rows="4" placeholder="أي ملاحظات على الطلب..."></textarea>
+      </div>
+
+      <button class="send-btn" onclick="sendOrder()">✅ تأكيد الطلب</button>
+       <div class="order-note">بعد التأكيد يتم تجهيز بيانات الطلب. الربط النهائي للإرسال التلقائي إلى واتساب يتم عبر WhatsApp Business Platform (Cloud API) من الخادم، بحيث لا يحتاج الزبون إلى فتح واتساب أو الضغط على إرسال.</div>
+    </div>
+  </main>
+</section>
+
+<section id="successPage" class="page">
+  <main class="container">
+    <div class="success">
+      <div class="success-icon">✓</div>
+      <h2>تم إرسال طلبك بنجاح</h2>
+      <p>سيتم التواصل معك قريباً عبر واتساب لتأكيد الطلب والتوصيل.</p>
+      <button onclick="openWaze()">🧭 فتح موقعي في Waze</button>
+      <button onclick="showPage('home')">🏠 العودة للرئيسية</button>
+    </div>
+  </main>
+</section>
+
+<nav class="bottom-nav">
+  <div class="bottom-inner">
+    <button class="nav-btn active" onclick="showPage('home')">🏠<br>الرئيسية</button>
+    <button class="nav-btn" onclick="showPage('home');scrollToProducts()">🛍️<br>المنتجات</button>
+    <button class="nav-btn" onclick="showPage('cart')">🛒<br>السلة</button>
+    <button class="nav-btn" onclick="alert('للطلب والاستفسار: 07876388878')">📞<br>اتصل بنا</button>
+  </div>
+</nav>
+
+<script>
+"use strict";
+
+const BUSINESS_WHATSAPP = "9647876388878";
+let userLocation = null;
+let cart = [];
+
+const products = [
+  {id:1,name:"كيلو بيتي فور",price:12000,category:"sweets",icon:"🍪"},
+  {id:2,name:"كيلو تارت",price:12000,category:"sweets",icon:"🍰"},
+  {id:3,name:"كرواسون شوكيو",price:1500,category:"croissant",icon:"🥐"},
+  {id:4,name:"كرواسون نوتيلا",price:1500,category:"croissant",icon:"🥐"},
+  {id:5,name:"صمون بركر شوفان",price:1000,category:"pastry",icon:"🍔"},
+  {id:6,name:"صمون كهرماني صغير",price:1000,category:"pastry",icon:"🥖"},
+  {id:7,name:"صمون بركر عادي",price:1000,category:"pastry",icon:"🍔"},
+  {id:8,name:"صمون شعير",price:1000,category:"pastry",icon:"🥖"},
+  {id:9,name:"كرواسون سادة",price:1500,category:"croissant",icon:"🥐"},
+  {id:10,name:"جرك حلاوة وقمر",price:750,category:"sweets",icon:"🍬"}
+];
+
+function money(n){
+  return Number(n).toLocaleString("ar-IQ") + " د.ع";
+}
+
+function renderProducts(list){
+  const box = document.getElementById("products");
+  box.innerHTML = "";
+
+  list.forEach(function(product){
+    const existing = cart.find(function(x){return x.id === product.id;});
+    const qty = existing ? existing.qty : 1;
+
+    box.insertAdjacentHTML("beforeend", `
+      <div class="card">
+        <div class="product-img">${product.icon}</div>
+        <div class="card-body">
+          <h3>${product.name}</h3>
+          <div class="price">${money(product.price)}</div>
+          <div class="controls">
+            <button class="qty-btn" onclick="changeProductQty(${product.id},-1)">−</button>
+            <div class="qty" id="qty-${product.id}">${qty}</div>
+            <button class="qty-btn" onclick="changeProductQty(${product.id},1)">+</button>
+          </div>
+          <button class="add-btn" onclick="addToCart(${product.id})">إضافة للسلة 🛒</button>
+        </div>
+      </div>
+    `);
+  });
+}
+
+function filterProducts(category,btn){
+  document.querySelectorAll(".categories button").forEach(function(b){
+    b.classList.remove("active");
+  });
+  btn.classList.add("active");
+
+  const list = category === "all"
+    ? products
+    : products.filter(function(p){return p.category === category;});
+
+  renderProducts(list);
+}
+
+function changeProductQty(id,value){
+  const el = document.getElementById("qty-" + id);
+  if(!el) return;
+  let qty = parseInt(el.textContent,10) || 1;
+  qty += value;
+  if(qty < 1) qty = 1;
+  el.textContent = qty;
+}
+
+function addToCart(id){
+  const product = products.find(function(p){return p.id === id;});
+  const qtyEl = document.getElementById("qty-" + id);
+  const qty = Math.max(1,parseInt(qtyEl ? qtyEl.textContent : "1",10) || 1);
+  const existing = cart.find(function(p){return p.id === id;});
+
+  if(existing) existing.qty += qty;
+  else cart.push({id:product.id,name:product.name,price:product.price,icon:product.icon,qty:qty});
+
+  updateCartCount();
+  showToast("✓ تمت إضافة المنتج إلى السلة");
+}
+
+function updateCartCount(){
+  const count = cart.reduce(function(sum,item){return sum + item.qty;},0);
+  document.getElementById("cartCount").textContent = count;
+}
+
+function renderCart(){
+  const box = document.getElementById("cartItems");
+  box.innerHTML = "";
+
+  if(cart.length === 0){
+    box.innerHTML = '<div class="empty">🛒<br><br>السلة فارغة</div>';
+    document.getElementById("totalPrice").textContent = "0 د.ع";
+    return;
+  }
+
+  cart.forEach(function(item){
+    box.insertAdjacentHTML("beforeend", `
+      <div class="cart-item">
+        <div class="cart-info">
+          <div class="cart-name">${item.icon} ${item.name}</div>
+          <div class="cart-qty">الكمية: ${item.qty}</div>
+        </div>
+        <div class="cart-actions">
+          <button class="qty-btn" onclick="cartQty(${item.id},-1)">−</button>
+          <b>${item.qty}</b>
+          <button class="qty-btn" onclick="cartQty(${item.id},1)">+</button>
+          <button class="delete" onclick="removeFromCart(${item.id})">🗑</button>
+        </div>
+      </div>
+    `);
+  });
+
+  const total = cart.reduce(function(sum,item){return sum + item.price * item.qty;},0);
+  document.getElementById("totalPrice").textContent = money(total);
+}
+
+function cartQty(id,value){
+  const item = cart.find(function(p){return p.id === id;});
+  if(!item) return;
+
+  item.qty += value;
+  if(item.qty <= 0) cart = cart.filter(function(p){return p.id !== id;});
+
+  updateCartCount();
+  renderCart();
+}
+
+function removeFromCart(id){
+  cart = cart.filter(function(p){return p.id !== id;});
+  updateCartCount();
+  renderCart();
+}
+
+function showPage(page){
+  document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active");});
+  const target = document.getElementById(page + "Page");
+  if(!target) return;
+
+  if(page === "checkout" && cart.length === 0){
+    alert("السلة فارغة");
+    document.getElementById("homePage").classList.add("active");
+    return;
+  }
+
+  target.classList.add("active");
+  if(page === "cart") renderCart();
+
+  window.scrollTo({top:0,behavior:"smooth"});
+
+  document.querySelectorAll(".nav-btn").forEach(function(b){b.classList.remove("active");});
+  if(page === "home") document.querySelectorAll(".nav-btn")[0].classList.add("active");
+  if(page === "cart") document.querySelectorAll(".nav-btn")[2].classList.add("active");
+}
+
+function scrollToProducts(){
+  setTimeout(function(){
+    document.getElementById("products").scrollIntoView({behavior:"smooth"});
+  },100);
+}
+
+function getLocation(){
+  const status = document.getElementById("locationStatus");
+  const waze = document.getElementById("wazeLink");
+
+  if(!navigator.geolocation){
+    status.textContent = "❌ جهازك لا يدعم تحديد الموقع";
+    return;
+  }
+
+  status.textContent = "📍 جاري تحديد موقعك...";
+
+  navigator.geolocation.getCurrentPosition(
+    function(position){
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      userLocation = {lat:lat,lon:lon};
+
+      status.textContent = "✅ تم تحديد موقعك بنجاح";
+      waze.href = "https://waze.com/ul?ll=" + lat + "," + lon + "&navigate=yes";
+      waze.style.display = "block";
+    },
+    function(){
+      status.textContent = "⚠️ لم نتمكن من تحديد موقعك";
+      const help=document.getElementById("locationHelp");
+      if(help){
+        help.style.display="block";
+        help.textContent="إذا رفضت الصلاحية سابقاً، فعّل إذن الموقع للمتصفح من إعدادات جهازك. وإذا ما تعرف، استخدم «إدخال العنوان يدوياً» حتى تكمل الطلب بسهولة.";
+      }
+    },
+    {enableHighAccuracy:true,timeout:15000,maximumAge:0}
+  );
+}
+
+function showToast(text){
+  const t=document.getElementById("toast");
+  if(!t){return}
+  t.textContent=text;t.classList.add("show");
+  clearTimeout(window.toastTimer);
+  window.toastTimer=setTimeout(()=>t.classList.remove("show"),2200);
+}
+function enterAddress(){
+  const value=prompt("اكتب عنوان التوصيل بالتفصيل:");
+  if(value && value.trim()){
+    manualAddress=value.trim();
+    document.getElementById("locationStatus").textContent="✅ تم إدخال عنوان التوصيل يدوياً";
+    const help=document.getElementById("locationHelp");
+    if(help){help.style.display="block";help.textContent="العنوان محفوظ للطلب ويمكنك تعديله بالضغط على «إدخال العنوان يدوياً» مرة أخرى."}
+  }
+}
+function scrollToOffers(){
+  document.getElementById("offersSection")?.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function openWaze(){
+  if(!userLocation){
+    alert("حدد موقعك أولاً");
+    showPage("checkout");
+    return;
+  }
+
+  const url = "https://waze.com/ul?ll=" +
+    userLocation.lat + "," + userLocation.lon + "&navigate=yes";
+
+  window.open(url,"_blank");
+}
+
+function normalizePhone(phone){
+  phone = phone.replace(/[٠-٩]/g,function(d){return "٠١٢٣٤٥٦٧٨٩".indexOf(d);}).replace(/[^\d+]/g,"");
+  if(phone.startsWith("+964")) return "0" + phone.slice(4);
+  if(phone.startsWith("964")) return "0" + phone.slice(3);
+  return phone;
+}
+
+function sendOrder(){
+  const name = document.getElementById("customerName").value.trim();
+  const phone = normalizePhone(document.getElementById("customerPhone").value.trim());
+  const notes = document.getElementById("notes").value.trim();
+
+  if(!name){alert("اكتب اسمك الكامل");return;}
+  if(!phone){alert("اكتب رقم واتساب الخاص بك");return;}
+  if(!/^07\d{9}$/.test(phone)){
+    alert("رقم الواتساب يجب أن يكون مثل: 07876388878");
+    return;
+  }
+  if(!userLocation && !manualAddress){alert("حدد موقعك تلقائياً أو أدخل عنوان التوصيل يدوياً");return;}
+  if(cart.length === 0){alert("السلة فارغة");return;}
+
+  let orderText = "";
+  cart.forEach(function(item,index){
+    orderText += (index + 1) + ". " + item.name + " × " + item.qty + "\n";
+  });
+
+  const wazeUrl = userLocation
+    ? "https://waze.com/ul?ll=" + userLocation.lat + "," + userLocation.lon + "&navigate=yes"
+    : "";
+
+  /*
+    الرسالة للمندوب:
+    - بدون أسعار المنتجات
+    - بدون الإجمالي
+    - رابط Waze فقط
+    - رقم الزبون الذي كتبه الزبون
+  */
+  const message =
+`🟤 طلب جديد — سنابل السلطان
+
+👤 الاسم: ${name}
+📱 واتساب الزبون: ${phone}
+
+🛒 الطلب:
+${orderText}
+📍 موقع الزبون — Waze:
+${wazeUrl || "لم يتم تحديد Waze؛ العنوان: " + manualAddress}
+
+📝 ملاحظات:
+${notes || "لا توجد"}
+
+🚚 يرجى التواصل مع الزبون لتأكيد الطلب والتوصيل.`;
+
+  const whatsappUrl =
+    "https://wa.me/" + BUSINESS_WHATSAPP + "?text=" + encodeURIComponent(message);
+
+  window.open(whatsappUrl,"_blank");
+  showPage("success");
+}
+
+renderProducts(products);
+updateCartCount();
+</script>
+<div id="toast" class="toast"></div>
+</body>
+</html>
